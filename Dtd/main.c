@@ -3,35 +3,42 @@
 #include <string.h>
 
 
+void openFile(FILE * f,char *name, char *code);
 
-void openFile (FILE * f,char* name, char* code);
+int main(){
 
-void openFile (FILE * f,char* name, char* code){
+    FILE *f;
+    char *name = "exemple.xml";
+    char *fileCode = "r+";
+
+    openFile(f, name, fileCode);
+
+    return 0;
+}
+
+void openFile(FILE * f,char *name, char *code){
 
     f = fopen(name, code);
+    char * result = malloc(sizeof(char) * (strlen(name)*10));
 
-    if( f != NULL ){
+    char *test = malloc(sizeof(char) * (strlen(name)*10));
+
+    if(f != NULL){
 
         printf("Fichier ouvert\n");
-        fclose(f);
 
-    } else {
+        while (fgets(result, strlen(name)*10, f), !feof(f)){
+
+            test = strchr(result, '<');
+            printf("%s", test);
+            //printf("%ld", ftell(f));
+
+        }
+
+    }else{
+
         printf("Fichier non ouvert");
-        fclose(f);
 
     }
 
-
-}
-
-
-
-int main(int argc, char * argv[])
-{
-    FILE * fp;
-    char * fileName = "exemple.xml";
-    char * fileCode = "r";
-
-    openFile(fp, fileName , fileCode );
-    return 0;
 }
