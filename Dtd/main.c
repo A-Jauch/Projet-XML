@@ -27,6 +27,8 @@ void openFile(FILE * f,char *name, char *code){
 
     char *test = malloc(sizeof(char) * (strlen(name)*10));
 
+    char * mot = "<classroom>";
+
     if(f != NULL){
 
         printf("Fichier ouvert\n");
