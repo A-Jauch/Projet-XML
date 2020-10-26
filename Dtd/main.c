@@ -64,18 +64,18 @@ void readFile(FILE * f,char *name, char *code){
     char *lastTag = malloc(sizeof(char) * (strlen(name)));
 
 
-    char * mot = "<classrooms>";
+    char * mot = "classrooms";
     char * word = "</classrooms>";
 
 
     if(f != NULL){
 
 
-        firstTag = saveString(f,result,mot,name);
+        strcpy(firstTag,saveString(f,result,mot,name));
         rewind(f);
-        lastTag = saveString(f,result1,word,name);
+        strcpy(lastTag ,saveString(f,result1,word,name));
         printf("\nFind: %s in %s",firstTag, name);
-        printf("\nFind: %s in %s",lastTag,name);
+        printf("\nFind:%s in %s",lastTag,name);
         int x = strcmp(firstTag, lastTag);
         printf("\nX%d",x);
         if(x != 52){
@@ -93,7 +93,10 @@ void readFile(FILE * f,char *name, char *code){
     }
 
 //    fclose(f);
-
+free(firstTag);
+free(result1);
+free(result);
+free(lastTag);
 }
 
 
