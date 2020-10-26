@@ -76,6 +76,13 @@ void readFile(FILE * f,char *name, char *code){
         lastTag = saveString(f,result1,word,name);
         printf("\nFind: %s in %s",firstTag, name);
         printf("\nFind: %s in %s",lastTag,name);
+        int x = strcmp(firstTag, lastTag);
+        printf("\nX%d",x);
+        if(x != 52){
+
+        printf("Erreur Syntaxe");
+
+        }
 
 
 
