@@ -5,6 +5,8 @@
 
 void openFile(FILE * f,char *name, char *code);
 void readFile(FILE * f,char *name, char *code);
+char* saveString(FILE * f, char *stringData, char *word, char *name);
+
 
 int main(){
 
@@ -56,23 +58,26 @@ void readFile(FILE * f,char *name, char *code){
 
     char * result = malloc(sizeof(char) * (strlen(name)));
 
-    char * result1 = malloc(sizeof(char) * (strlen(name)*10));
+    char * result1 = malloc(sizeof(char) * (strlen(name)));
 
-    char *test = malloc(sizeof(char) * (strlen(name)));
+    char *firstTag = malloc(sizeof(char) * (strlen(name)));
+    char *lastTag = malloc(sizeof(char) * (strlen(name)));
+
 
     char * mot = "<classrooms>";
+    char * word = "</classrooms>";
+
 
     if(f != NULL){
 
-        while (fgets(result, strlen(name)*5, f), !feof(f)){
 
-            test = strstr(result, mot);
-            printf("%s", test);
-            //strcpy(result, test);
+        firstTag = saveString(f,result,mot,name);
+        rewind(f);
+        lastTag = saveString(f,result1,word,name);
+        printf("\nFind: %s in %s",firstTag, name);
+        printf("\nFind: %s in %s",lastTag,name);
 
 
-
-        }
 
     }else{
 
@@ -81,5 +86,28 @@ void readFile(FILE * f,char *name, char *code){
     }
 
 //    fclose(f);
+
+}
+
+
+char* saveString(FILE * f, char *stringData, char *word, char *name){
+
+    char *cursor = malloc(sizeof(char) * (strlen(name)));
+    char * result = malloc(sizeof(char) * (strlen(name)));
+    char * s = malloc(sizeof(char) * (strlen(name)));
+
+        while (fgets(result, strlen(name)*5, f), !feof(f)){
+
+            cursor = strstr(result, word);
+            if(cursor != NULL){
+            //printf("%s", result1);
+            strcpy(s, cursor);
+            //printf("\n %s Fic: %s", s, name);
+            }
+        }
+
+    return s;
+
+
 
 }
