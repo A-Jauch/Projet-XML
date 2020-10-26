@@ -43,7 +43,7 @@ void openFile(FILE * f,char *name, char *code){
 
     }
 
-    fclose(f);
+ //   fclose(f);
 
 }
 
@@ -67,8 +67,8 @@ void readFile(FILE * f,char *name, char *code){
             test = strstr(result, mot);
             printf("%s", test);
             //strcpy(result, test);
-            
-                        
+
+
 
         }
 
@@ -78,6 +78,6 @@ void readFile(FILE * f,char *name, char *code){
 
     }
 
-    fclose(f);
+//    fclose(f);
 
 }
