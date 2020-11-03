@@ -5,7 +5,7 @@
 
 void openFile(FILE * f,char *name, char *code);
 void readFile(FILE * f,char *name, char *code);
-char* saveString(FILE * f, char *stringData, char *word, char *name);
+char* saveString(FILE * f,  char *word, char *name);
 
 
 int main(){
@@ -64,18 +64,30 @@ void readFile(FILE * f,char *name, char *code){
     char *lastTag = malloc(sizeof(char) * (strlen(name)));
 
 
-    char * mot = "classrooms";
+    char * mot = "<classrooms>";
     char * word = "</classrooms>";
+   // char * word1 = "classrooms";
 
 
     if(f != NULL){
 
 
-        strcpy(firstTag,saveString(f,result,mot,name));
+        strcpy(firstTag,saveString(f,mot,name));
         rewind(f);
-        strcpy(lastTag ,saveString(f,result1,word,name));
+        strcpy(lastTag ,saveString(f,word,name));
+
+          for(int i = 0; i < strlen(mot)-2 ; i++){
+
+        result[i] = firstTag[i+1];
+        }
+
         printf("\nFind: %s in %s",firstTag, name);
         printf("\nFind:%s in %s",lastTag,name);
+        printf("\n%c",firstTag[10]);
+       // printf("\nRS:%s in %s",result,name);
+
+
+        printf("\ntt:%s", result);
         int x = strcmp(firstTag, lastTag);
         printf("\nX%d",x);
         if(x != 52){
@@ -93,31 +105,34 @@ void readFile(FILE * f,char *name, char *code){
     }
 
 //    fclose(f);
-free(firstTag);
-free(result1);
-free(result);
-free(lastTag);
+
 }
 
 
-char* saveString(FILE * f, char *stringData, char *word, char *name){
+char* saveString(FILE * f, char *word, char *name){
 
+    char * s = malloc(sizeof(char) * (strlen(name)));
     char *cursor = malloc(sizeof(char) * (strlen(name)));
     char * result = malloc(sizeof(char) * (strlen(name)));
-    char * s = malloc(sizeof(char) * (strlen(name)));
+
 
         while (fgets(result, strlen(name)*5, f), !feof(f)){
 
+            //printf("\n R:%s", result);
+           // printf("\n S:%s", s);
+          //  printf("\n C:%s", cursor);
             cursor = strstr(result, word);
             if(cursor != NULL){
-            //printf("%s", result1);
+           // printf("C:%s", cursor);
             strcpy(s, cursor);
-            //printf("\n %s Fic: %s", s, name);
+           // printf("\n S:%s", s);
             }
         }
 
     return s;
-
+    free(s);
+    free(cursor);
+    free(result);
 
 
 }
