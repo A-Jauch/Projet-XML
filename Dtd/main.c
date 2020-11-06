@@ -17,12 +17,13 @@ int main(){
     char* stockDTD = malloc(sizeof(char) * (strlen(name)));
 
 
-   strcpy(stockXML,readFileX(f, name, fileCode,"<classroom>"));
-   strcpy(stockXML1,readFileX(f, name, fileCode,"</classroom>"));
+   strcpy(stockXML,readFileX(f, name, fileCode,"<classrooms>"));
+   strcpy(stockXML1,readFileX(f, name, fileCode,"</classrooms>"));
    printf("stockX:%s", stockXML);
    printf("stockX1:%s", stockXML1);
    strcpy(stockDTD,readFileX(f, name1, fileCode1,"classrooms"));
    printf("stocKD:%s", stockDTD);
+   saveString(f,stockXML,name);
 
         int x = strcmp(stockXML, stockXML1);
         if(x != 52){
