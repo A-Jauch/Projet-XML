@@ -29,6 +29,34 @@ char* saveString(FILE * f, char *word, char *name){
 
 }
 
+char* removeFTag(FILE * f, char*xmlString, char*word,char*name){
+    f = fopen(name, "r");
+
+char * result = malloc(sizeof(char) * (strlen(word)));
+char *firstTag = malloc(sizeof(char) * (strlen(word)));
+
+    strcpy(firstTag,saveString(f,word,name));
+    rewind(f);
+    char*p = "/";
+
+    if(firstTag[1] == p[0]){
+        for(int i = 0; i < strlen(word)-3 ; i++){
+            result[i] = firstTag[i+2];
+            }
+            return result;
+
+    } else {
+        for(int i = 1; i < strlen(word)-1 ; i++){
+            result[i-1] = firstTag[i];
+            }
+            return result;
+
+    }
+
+    free(result);
+    free(firstTag);
+}
+
 char* readFileX(FILE * f,char *name, char *code, char*word){
 
 
