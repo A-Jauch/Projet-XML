@@ -6,7 +6,9 @@
 
 void openFile(FILE * f,char *name, char *code);
 void readFile(FILE * f,char *name, char *code);
-int countOccurence(char *buffer, char *word);
+//int countOccurence(char *buffer, char *word);
+char* saveString(FILE * f, char *stringData, char *word, char *name);
+
 
 int main(){
 
@@ -17,15 +19,15 @@ int main(){
     char *fileCode1 = "r+";
     char * word = "<classroom>";
 
-    int test = fseek(f, 0, SEEK_END);
+    //int test = fseek(f, 0, SEEK_END);
 
-    char * size = malloc(sizeof(char) * test);
+    //char * size = malloc(sizeof(char) * test);
 
     readFile(f, name, fileCode);
     readFile(f, name1, fileCode1);
-    int count = countOccurence(size , word);
+    //int count = countOccurence(size , word);
 
-    printf("%d aaa", count);
+    //printf("%d aaa", count);
 
     return 0;
 }
@@ -54,7 +56,7 @@ void openFile(FILE * f,char *name, char *code){
 
     }
 
-    fclose(f);
+ //   fclose(f);
 
 }
 
@@ -65,25 +67,33 @@ void readFile(FILE * f,char *name, char *code){
 
     char * result = malloc(sizeof(char) * (strlen(name)));
 
-    char * result1 = malloc(sizeof(char) * (strlen(name)*10));
+    char * result1 = malloc(sizeof(char) * (strlen(name)));
 
-    char *test = malloc(sizeof(char) * (strlen(name)));
+    char *firstTag = malloc(sizeof(char) * (strlen(name)));
+    char *lastTag = malloc(sizeof(char) * (strlen(name)));
 
-    char * mot = "classroom";
+
+    char * mot = "classrooms";
+    char * word = "</classrooms>";
+
 
     if(f != NULL){
 
-        while (fgets(result, strlen(name)*5, f), !feof(f)){
 
-            test = strstr(result, mot);
-            if(test != NULL){
+        strcpy(firstTag,saveString(f,result,mot,name));
+        rewind(f);
+        strcpy(lastTag ,saveString(f,result1,word,name));
+        printf("\nFind: %s in %s",firstTag, name);
+        printf("\nFind:%s in %s",lastTag,name);
+        int x = strcmp(firstTag, lastTag);
+        printf("\nX%d",x);
+        if(x != 52){
 
-                printf("%s\n", test);
-                strcpy(result, test); 
-
-            }
+        printf("Erreur Syntaxe");
 
         }
+
+
 
     }else{
 
@@ -91,7 +101,31 @@ void readFile(FILE * f,char *name, char *code){
 
     }
 
-    fclose(f);
+//    fclose(f);
+free(firstTag);
+free(result1);
+free(result);
+free(lastTag);
+}
+
+
+char* saveString(FILE * f, char *stringData, char *word, char *name){
+
+    char *cursor = malloc(sizeof(char) * (strlen(name)));
+    char * result = malloc(sizeof(char) * (strlen(name)));
+    char * s = malloc(sizeof(char) * (strlen(name)));
+
+        while (fgets(result, strlen(name)*5, f), !feof(f)){
+
+            cursor = strstr(result, word);
+            if(cursor != NULL){
+            //printf("%s", result1);
+            strcpy(s, cursor);
+            //printf("\n %s Fic: %s", s, name);
+            }
+        }
+
+    return s;
 
 }
 
