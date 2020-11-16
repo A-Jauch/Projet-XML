@@ -131,7 +131,6 @@ char* readFileX(FILE * f,char *name, char *code, char*word){
         //printf("\n%c",firstTag[10]);
        // printf("\nRS:%s in %s",result,name);
         printf("\ntt:%s\n", result);
-      //  printf("\nttR:%s\n", result1);
 
         return result;
 
