@@ -4,6 +4,7 @@
 #include "readData.h"
 
 void validateHeaderTag();
-void validateTag();
+void validateDtdOperand();
+char* validateTag();
 
 #endif // VALIDATE_H_INCLUDED

@@ -4,7 +4,7 @@
 int main(){
 
     validateHeaderTag();
-    validateTag();
+    validateDtdOperand();
     return 0;
 }
 
