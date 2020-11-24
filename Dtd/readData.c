@@ -172,7 +172,7 @@ char* readFileX(FILE * f,char *name, char *code, char*word){
           for(int i = 0; i < strlen(word) ; i++){
             result[i] = firstTag[i];
             }
-        //printf("Find:%s in %s\n",firstTag, name);
+        printf("Find:%s in %s\n",firstTag, name);
 
         //printf("\nSearch:%s\n", result);
 
